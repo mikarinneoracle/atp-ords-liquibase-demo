@@ -13,9 +13,9 @@ do
 done
 sh gen_apex.sh
 oci db autonomous-database generate-wallet --autonomous-database-id $ocid --password 'WelcomeFolks123#!' --file wallet.zip
-mkdir -p network/admin
-mv wallet.zip network/admin/
-cd network/admin
+mkdir -p ./network/admin
+mv wallet.zip ./network/admin/
+cd ./network/admin
 unzip wallet.zip
 cd ../..
 export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/r/priceadmin/price-admin/login")
