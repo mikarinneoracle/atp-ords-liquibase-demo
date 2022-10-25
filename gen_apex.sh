@@ -8,7 +8,7 @@ export application_id=100
 export tables_to_copy=Y
 
 if [ -n "${wsname}" ]; then
-    printf "set cloudconfig /home/mika_rinne/pricing/network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd_apex.sql
+    printf "set cloudconfig ./network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd_apex.sql
     printf "begin\n" >> upd_apex.sql
     printf "    apex_instance_admin.remove_workspace(\n" >> upd_apex.sql
     printf "       p_drop_users       => 'Y',\n" >> upd_apex.sql
@@ -20,7 +20,7 @@ if [ -n "${wsname}" ]; then
     #sql /nolog @./upd_apex.sql
 fi
 
-printf "set cloudconfig /home/mika_rinne/pricing/network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd.sql
+printf "set cloudconfig ./network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd.sql
 printf "create user ${schema} identified by \"${pwd}\"\n/\n" >> upd.sql
 printf "GRANT CONNECT, CREATE SESSION, CREATE CLUSTER, CREATE DIMENSION, CREATE INDEXTYPE, CREATE JOB, CREATE MATERIALIZED VIEW, CREATE OPERATOR, CREATE PROCEDURE, CREATE SEQUENCE, CREATE SYNONYM, CREATE TABLE, CREATE TRIGGER, CREATE TYPE, CREATE VIEW to ${schema};\n" >> upd.sql
 printf "ALTER USER ${schema} quota unlimited on DATA;\n/\n" >> upd.sql
@@ -55,7 +55,7 @@ printf "\ntables\nexit" >> upd.sql
 sql /nolog @./upd.sql
 
 if [ -n "${wsname}" ]; then
-    printf "set cloudconfig /home/mika_rinne/pricing/network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd_apex.sql
+    printf "set cloudconfig ./network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd_apex.sql
     printf "begin\n" >> upd_apex.sql
     printf "    for c1 in (select privilege\n" >> upd_apex.sql
     printf "             from sys.dba_sys_privs\n" >> upd_apex.sql
@@ -101,7 +101,7 @@ if [ -n "${application_id}" ]; then
         printf "APEX_UTIL.PAUSE(2);\n" >> upd_apex_privs.sql;
         printf "end;\n/\n" >> upd_apex_privs.sql;
 
-        printf "set cloudconfig /home/mika_rinne/pricing/network/admin/wallet.zip\nconn ${schema}/${pwd}@${conn}\n@upd_apex_privs.sql\nlb update -changelog f${application_id}.xml\nexit" > upd_apex.sql
+        printf "set cloudconfig ./network/admin/wallet.zip\nconn ${schema}/${pwd}@${conn}\n@upd_apex_privs.sql\nlb update -changelog f${application_id}.xml\nexit" > upd_apex.sql
         
         sql /nolog @./upd_apex.sql
     else
