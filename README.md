@@ -1,5 +1,8 @@
 ### Instructions
 
+<b>prereq: oci cli must be working</b>
+
+<p>
 open oci cloud shell
 
 <p>
