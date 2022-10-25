@@ -7,12 +7,12 @@ git clone https://github.com/mikarinneoracle/atp-ords-liquibase-demo.git
 
 <p>
 edit <code>script.sh</code> with oci code editor<br>
-=> add your oci compartment by replacing <i><YOUR COMPARTMENT OCID></i> and the region if necessary (lines 1-2):
+=> add your oci compartment by replacing <i>&lt;YOUR COMPARTMENT OCID&gt;</i> and the region if necessary (lines 1-2):
 
 <p>
 <pre>
 export region='eu-amsterdam-1'
-export compt_ocid='<YOUR COMPARTMENT OCID>'
+export compt_ocid='&lt;YOUR COMPARTMENT OCID&gt;'
 </pre>
 
 <p>
