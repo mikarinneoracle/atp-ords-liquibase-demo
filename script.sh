@@ -19,8 +19,11 @@ cd ./network/admin
 unzip wallet.zip
 cd ../..
 export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/priceadmin")
+export apex=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/r/priceadmin/price-admin/login")
 echo $url
-sed -i "s/URL/$url/g" vue.js
+echo $apex
+sed -i "s/URL|$url|g" vue.js
+sed -i "s/URL|$apex|g" index.html
 oci os bucket create --compartment-id  $compt_ocid --name pricing --public-access-type ObjectReadWithoutList
 oci os object put --force --bucket-name pricing --file index.html --content-type "text/html" --force
 oci os object put --force --bucket-name pricing --file vue.js --content-type "text/javascript" --force
