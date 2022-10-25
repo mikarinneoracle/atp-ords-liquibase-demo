@@ -13,8 +13,8 @@ do
 done
 oci db autonomous-database generate-wallet --autonomous-database-id $ocid --password 'WelcomeFolks123#!' --file wallet.zip
 mkdir -p ./network/admin
-sh gen_apex.sh
 mv wallet.zip ./network/admin/
+sh gen_apex.sh
 cd ./network/admin
 unzip wallet.zip
 cd ../..
