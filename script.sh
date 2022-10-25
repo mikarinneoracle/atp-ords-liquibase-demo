@@ -1,5 +1,7 @@
 export region='eu-amsterdam-1'
 export compt_ocid='<YOUR COMPARTMENT OCID>'
+oci db autonomous-database create --compartment-id  $compt_ocid --db-name pricing --cpu-core-count 1 --data-storage-size-in-tbs 1 --admin-password 'WelcomeFolks123#!' --display-name pricing
+sleep 20
 export ocid=$(oci db autonomous-database list --compartment-id $compt_ocid | jq -r '.data[] | select( ."db-name" == "pricing" ).id')
 echo "ATP: $ocid"
 export tries=0
