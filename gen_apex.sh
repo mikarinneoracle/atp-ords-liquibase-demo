@@ -1,5 +1,6 @@
 #!/bin/bash
- 
+
+export path=$(pwd)
 export conn=pricing_high
 export pwd=WelcomeFolks123#!
 export schema=PRICEADMIN
