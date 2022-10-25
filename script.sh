@@ -11,14 +11,15 @@ do
   tries=$(( $tries + 1 ))
   sleep 5
 done
-sh gen_apex.sh
 oci db autonomous-database generate-wallet --autonomous-database-id $ocid --password 'WelcomeFolks123#!' --file wallet.zip
 mkdir -p ./network/admin
+sh gen_apex.sh
 mv wallet.zip ./network/admin/
 cd ./network/admin
 unzip wallet.zip
 cd ../..
-export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/r/priceadmin/price-admin/login")
+export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/priceadmin")
+echo $url
 sed -i "s/URL/$url/g" vue.js
 oci os bucket create --compartment-id  $compt_ocid --name pricing --public-access-type ObjectReadWithoutList
 oci os object put --force --bucket-name pricing --file index.html --content-type "text/html" --force
