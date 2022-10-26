@@ -10,3 +10,7 @@ resource "oci_database_autonomous_database" "pricing_autonomous_database" {
   db_workload              = "OLTP"
   display_name             = "pricing"
 }
+
+output "ocid" {
+   value = oci_database_autonomous_database.pricing_autonomous_database.id
+}
