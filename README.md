@@ -24,5 +24,6 @@ run sh script.sh
 <p>
 access <i>pricing bucket</i> from your browser and open the <code>index.html</code>
 
-<p>
-Youtube video: <a href="https://www.youtube.com/watch?v=80CWk2baJy4">https://www.youtube.com/watch?v=80CWk2baJy4</a>
+### See on Youtube
+
+Link to the video: <a href="https://www.youtube.com/watch?v=80CWk2baJy4">https://www.youtube.com/watch?v=80CWk2baJy4</a>
