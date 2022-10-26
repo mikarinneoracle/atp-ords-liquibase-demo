@@ -1,25 +1,11 @@
 #!/bin/bash
 
-export path=$(pwd)
 export conn=pricing_high
 export pwd=WelcomeFolks123#!
 export schema=PRICEADMIN
 export wsname=PRICEADMIN
 export application_id=100
 export tables_to_copy=Y
-
-if [ -n "${wsname}" ]; then
-    printf "set cloudconfig ./network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd_apex.sql
-    printf "begin\n" >> upd_apex.sql
-    printf "    apex_instance_admin.remove_workspace(\n" >> upd_apex.sql
-    printf "       p_drop_users       => 'Y',\n" >> upd_apex.sql
-    printf "       p_drop_tablespaces => 'Y',\n" >> upd_apex.sql
-    printf "       p_workspace        => '${wsname}'\n" >> upd_apex.sql
-    printf "     );\n" >> upd_apex.sql
-    printf "     commit;\n" >> upd_apex.sql
-    printf "end;\n/\n\n" >> upd_apex.sql
-    #sql /nolog @./upd_apex.sql
-fi
 
 printf "set cloudconfig ./network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd.sql
 printf "create user ${schema} identified by \"${pwd}\"\n/\n" >> upd.sql
