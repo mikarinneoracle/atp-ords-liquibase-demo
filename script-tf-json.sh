@@ -5,7 +5,7 @@ mkdir html
 cp ../index.html html/.
 cp ../vue.js html/.    
 cp ../pricing.css html/. 
-zip stack.zip *
+zip -r stack.zip *
 export ocid=$(oci resource-manager stack create --config-source stack.zip --compartment-id $compt_ocid --terraform-version 0.12.x | jq '.data.id' | tr -d '"')
 cd ..
 echo "--------- Update Terraform with vars.json ---------"
