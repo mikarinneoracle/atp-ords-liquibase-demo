@@ -1,6 +1,10 @@
 export region='eu-amsterdam-1'
 export compt_ocid='<YOUR COMPARTMENT OCID>'
 cd terraform
+mkdir html
+cp ../index.html html/.
+cp ../vue.js html/.    
+cp ../pricing.css html/. 
 zip stack.zip *
 export ocid=$(oci resource-manager stack create --config-source stack.zip --compartment-id $compt_ocid --terraform-version 0.12.x | jq '.data.id' | tr -d '"')
 cd ..
@@ -40,7 +44,5 @@ echo $url
 echo $apex
 sed -i "s|URL|$url|g" vue.js
 sed -i "s|URL|$apex|g" index.html
-oci os bucket create --compartment-id  $compt_ocid --name pricing --public-access-type ObjectReadWithoutList
 oci os object put --force --bucket-name pricing --file index.html --content-type "text/html" --force
 oci os object put --force --bucket-name pricing --file vue.js --content-type "text/javascript" --force
-oci os object put --force --bucket-name pricing --file pricing.css  --content-type "text/css" --force
