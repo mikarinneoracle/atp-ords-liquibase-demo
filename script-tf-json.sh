@@ -4,9 +4,9 @@ cd terraform
 zip stack.zip *
 export ocid=$(oci resource-manager stack create --config-source stack.zip --compartment-id $compt_ocid --terraform-version 0.12.x | jq '.data.id' | tr -d '"')
 cd ..
-echo "--------- Update Terraform with vars.json ---------"
+echo "\n--------- Update Terraform with vars.json ---------"
 cat vars.json
-echo "---------------------------------------------------"
+echo "\n---------------------------------------------------"
 oci resource-manager stack update --stack-id $ocid --variables file://vars.json --force
 export jobId=$(oci resource-manager job create --stack-id $ocid --operation APPLY --apply-job-plan-resolution '{"isAutoApproved": true }' | jq '.data.id' | tr -d '"')
 export tries=0

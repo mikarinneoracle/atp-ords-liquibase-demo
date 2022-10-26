@@ -12,5 +12,5 @@ resource "oci_database_autonomous_database" "pricing_autonomous_database" {
 }
 
 output "atp" {
-   value = "oci_database_autonomous_database.pricing_autonomous_database.id"
+   value = "\"${oci_database_autonomous_database.pricing_autonomous_database.id}\""
 }
