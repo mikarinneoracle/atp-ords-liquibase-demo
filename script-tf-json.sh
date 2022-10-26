@@ -4,9 +4,11 @@ cd terraform
 zip stack.zip *
 export ocid=$(oci resource-manager stack create --config-source stack.zip --compartment-id $compt_ocid --terraform-version 0.12.x | jq '.data.id' | tr -d '"')
 cd ..
-oci resource-manager stack update --stack-id $ocid --variables file://vars.json --force
+echo "--------- Update Terraform with vars.json ---------"
 cat vars.json
-export jobId=$(oci resource-manager job --stack-id $ocid --operation APPLY --execution-plan-strategy AUTO_APPROVED | jq '.data.id' | tr -d '"')
+echo "---------------------------------------------------"
+oci resource-manager stack update --stack-id $ocid --variables file://vars.json --force
+export jobId=$(oci resource-manager job create --stack-id $ocid --operation APPLY --apply-job-plan-resolution '{"isAutoApproved": true }' | jq '.data.id' | tr -d '"')
 export tries=0
 export status=''
 while [ $tries -le 100 ] && [[ $status != 'SUCCEEDED' ]] 
@@ -23,7 +25,7 @@ fi
 oci resource-manager job get-job-logs-content --job-id $jobId > log.txt
 sed -i 's/\\n/\n/g' log.txt
 tail -n 3 log.txt | head -n 1 > out.txt
-export ocid=$(grep -oP '(?<=ocid = \\")[^\\"]*' out.txt)
+export ocid=$(grep -oP '(?<=atp = \\")[^\\"]*' out.txt)
 echo "ATP: $ocid"
 exit
 
