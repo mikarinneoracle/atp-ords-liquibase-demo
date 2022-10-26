@@ -16,7 +16,7 @@ mkdir -p ./network/admin
 mv wallet.zip ./network/admin/
 sh gen_apex.sh
 cd ./network/admin
-unzip wallet.zip
+unzip -q wallet.zip
 cd ../..
 export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/priceadmin")
 export apex=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/r/priceadmin/price-admin/login")
