@@ -14,7 +14,7 @@ resource "oci_database_autonomous_database_wallet" "autonomous_database_wallet" 
   password               = "WelcomeFolks123#!"
   base64_encode_content  = "true"
   provisioner "local-exec" {
-    command = "/bin/bash script.sh"
+    command = "sh script.sh ${oci_database_autonomous_database_wallet.autonomous_database_wallet.content}"
   }
 }
 

@@ -1,4 +1,4 @@
-base64 --decode ${oci_database_autonomous_database_wallet.autonomous_database_wallet.content} > wallet.zip
+base64 --decode $1 > wallet.zip
 ls
 mkdir -p ./network/admin
 mv wallet.zip ./network/admin/
