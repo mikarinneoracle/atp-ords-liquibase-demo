@@ -31,6 +31,9 @@ sed -i 's/\\n/\n/g' log.txt
 tail -n 3 log.txt | head -n 1 > out.txt
 export ocid=$(grep -oP '(?<=atp = \\")[^\\"]*' out.txt)
 echo "ATP: $ocid"
+
+exit
+
 oci db autonomous-database generate-wallet --autonomous-database-id $ocid --password 'WelcomeFolks123#!' --file wallet.zip
 mkdir -p ./network/admin
 mv wallet.zip ./network/admin/
