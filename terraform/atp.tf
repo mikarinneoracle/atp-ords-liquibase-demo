@@ -13,11 +13,11 @@ resource "oci_database_autonomous_database_wallet" "autonomous_database_wallet" 
   autonomous_database_id = oci_database_autonomous_database.pricing_autonomous_database.id
   password               = "WelcomeFolks123#!"
   base64_encode_content  = "true"
-  provisioner "local-exec" {
-    command = "ls"
-  }
 }
 
 output "atp" {
+   provisioner "local-exec" {
+     command = "ls"
+   }
    value = "\"${oci_database_autonomous_database.pricing_autonomous_database.id}\""
 }
