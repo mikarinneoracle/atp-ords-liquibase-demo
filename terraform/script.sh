@@ -2,7 +2,7 @@ echo $1 > wallet64
 base64 --decode wallet64 > wallet.zip
 mkdir -p ./network/admin
 mv wallet.zip ./network/admin/
-#sh gen_apex.sh
+sh gen_apex.sh
 cd ./network/admin
 unzip -q wallet.zip
 cd ../..
