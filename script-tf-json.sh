@@ -21,9 +21,13 @@ do
   echo "stack status: $tries $status"
   tries=$(( $tries + 1 ))
   sleep 5
+  if [ "$status" == "FAILED" ]; then
+    echo "${stackName} stack apply failed .. exiting script."
+    exit 1
+  fi
 done
 if [ "$status" != "SUCCEEDED" ]; then
-  echo "${stackName} stack apply not completed in 500 seconds .. exiting"
+  echo "${stackName} stack apply not completed in 500 seconds .. exiting script."
   exit 1
 fi
 oci resource-manager job get-job-logs-content --job-id $jobId > log.txt
