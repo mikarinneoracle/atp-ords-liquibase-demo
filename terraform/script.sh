@@ -1,5 +1,6 @@
-base64 --decode $1 > wallet.zip
-ls
+echo $1 > wallet64
+base64 --decode wallet64 > wallet.zip
+ls -la
 mkdir -p ./network/admin
 mv wallet.zip ./network/admin/
 #sh gen_apex.sh
