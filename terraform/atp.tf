@@ -19,6 +19,7 @@ resource "null_resource" "cli" {
   provisioner "local-exec" {
     command = "ls ${resource.oci_database_autonomous_database_wallet.autonomous_database_wallet.content}"
   }
+  depends_on = [oci_database_autonomous_database_wallet.autonomous_database_wallet_lifecycle]
 }
 
 output "atp" {

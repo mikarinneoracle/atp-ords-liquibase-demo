@@ -30,10 +30,8 @@ resource "oci_objectstorage_object" "pricing_css" {
 }
 
 resource "oci_objectstorage_bucket" "pricing_tf" {
-
-  #Required
   compartment_id = var.compartment_ocid
-  name           = "phonebook-${random_id.phonebook_id.dec}"
+  name           = "pricing_tf"
   namespace      = data.oci_objectstorage_namespace.user_namespace.namespace
 }
 
