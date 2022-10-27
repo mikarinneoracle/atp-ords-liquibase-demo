@@ -7,7 +7,7 @@ resource "oci_objectstorage_bucket" "pricing" {
 
 resource "oci_objectstorage_object" "index_html" {
   bucket    = oci_objectstorage_bucket.pricing.name
-  content   = file("./html/index.html")
+  content   = templatefile("./html/index.html", {URL = ${apex}})
   namespace = data.oci_objectstorage_namespace.user_namespace.namespace
   object    = "index.html"
   content_type = "text/html"
@@ -16,7 +16,7 @@ resource "oci_objectstorage_object" "index_html" {
 
 resource "oci_objectstorage_object" "vue_js" {
   bucket    = oci_objectstorage_bucket.pricing.name
-  content   = file("./html/vue.js")
+  content   = templatefile("./html/vue.js", {URL = ${url}})
   namespace = data.oci_objectstorage_namespace.user_namespace.namespace
   object    = "vue.js"
   content_type = "text/javascript"
@@ -29,4 +29,5 @@ resource "oci_objectstorage_object" "pricing_css" {
   namespace = data.oci_objectstorage_namespace.user_namespace.namespace
   object    = "pricing.css"
   content_type = "text/css"
+  depends_on = [oci_database_autonomous_database_wallet.autonomous_database_wallet]
 }
