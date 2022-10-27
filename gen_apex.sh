@@ -13,12 +13,14 @@ printf "GRANT CONNECT, CREATE SESSION, CREATE CLUSTER, CREATE DIMENSION, CREATE 
 printf "ALTER USER ${schema} quota unlimited on DATA;\n/\n" >> upd.sql
 printf "conn ${schema}/${pwd}@${conn}\n" >> upd.sql
 if [ -f "controller.xml" ]; then
+   echo "Copying tables to ${schema}."
    printf "lb update -changelog controller.xml\n" >> upd.sql
 else
     echo "Controller.xml not found. Schema not copied to ${schema}."
 fi
 
 if [ -f "ords-rest_schema.xml" ]; then
+   echo "Copying ORDS to ${schema}."
    printf "lb update -changelog ords-rest_schema.xml\n" >> upd.sql
 else
     echo "Ords-rest_schema not found. ORDS schema not copied to ${schema}."
