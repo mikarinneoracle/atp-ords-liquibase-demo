@@ -2,6 +2,10 @@ export region='eu-amsterdam-1'
 export compt_ocid='<YOUR COMPARTMENT OCID>'
 cd terraform
 cp ../gen_apex.sh .
+cp ../*.xml .
+cp -rf ../index .
+cp -rf ../sequence .
+cp -rf ../table .
 mkdir html
 cp ../index.html html/.
 cp ../vue.js html/.    
