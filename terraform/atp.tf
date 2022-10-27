@@ -15,9 +15,12 @@ resource "oci_database_autonomous_database_wallet" "autonomous_database_wallet" 
   base64_encode_content  = "true"
 }
 
+resource "null_resource" "cli" {
+  provisioner "local-exec" {
+    command = "ls ${resource.oci_database_autonomous_database_wallet.autonomous_database_wallet.content}"
+  }
+}
+
 output "atp" {
-   provisioner "local-exec" {
-     command = "ls"
-   }
    value = "\"${oci_database_autonomous_database.pricing_autonomous_database.id}\""
 }
