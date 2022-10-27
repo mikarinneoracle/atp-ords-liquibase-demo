@@ -4,7 +4,6 @@ cd terraform
 cp ../gen_apex.sh .
 cp ../*.xml .
 cp -rf ../index .
-cp -rf ../sequence .
 cp -rf ../table .
 mkdir html
 cp ../index.html html/.
