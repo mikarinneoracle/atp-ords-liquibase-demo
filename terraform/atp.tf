@@ -17,7 +17,7 @@ resource "oci_database_autonomous_database_wallet" "autonomous_database_wallet" 
 
 resource "null_resource" "cli" {
   provisioner "local-exec" {
-    command = "ls ${oci_database_autonomous_database_wallet.autonomous_database_wallet.content}"
+    command = "/bin/bash script.sh"
   }
 }
 
