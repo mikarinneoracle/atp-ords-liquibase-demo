@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export conn=pricing_high
+export conn=pricing_tp
 export pwd=WelcomeFolks123#!
 export schema=PRICEADMIN
 export wsname=PRICEADMIN
@@ -13,13 +13,15 @@ printf "GRANT CONNECT, CREATE SESSION, CREATE CLUSTER, CREATE DIMENSION, CREATE 
 printf "ALTER USER ${schema} quota unlimited on DATA;\n/\n" >> upd.sql
 printf "conn ${schema}/${pwd}@${conn}\n" >> upd.sql
 if [ -f "controller.xml" ]; then
-   printf "lb update -changelog controller.xml\n" >> upd.sql
+   echo "Copying tables to ${schema}."
+   printf "lb update-file -changelog controller.xml\n" >> upd.sql
 else
     echo "Controller.xml not found. Schema not copied to ${schema}."
 fi
 
 if [ -f "ords-rest_schema.xml" ]; then
-   printf "lb update -changelog ords-rest_schema.xml\n" >> upd.sql
+   echo "Copying ORDS to ${schema}."
+   printf "lb update-file -changelog ords-rest_schema.xml\n" >> upd.sql
 else
     echo "Ords-rest_schema not found. ORDS schema not copied to ${schema}."
 fi
@@ -27,7 +29,7 @@ fi
 if [ "${tables_to_copy}" == "Y" ]; then
     echo "Copying tables data to ${schema}."
     if [ -f "data.xml" ]; then
-           printf "lb update -changelog data.xml\n" >> upd.sql
+           printf "lb update-file -changelog data.xml\n" >> upd.sql
     fi
 
     for filename in data*.xml; do
@@ -88,7 +90,7 @@ if [ -n "${application_id}" ]; then
         printf "APEX_UTIL.PAUSE(2);\n" >> upd_apex_privs.sql;
         printf "end;\n/\n" >> upd_apex_privs.sql;
 
-        printf "set cloudconfig ./network/admin/wallet.zip\nconn ${schema}/${pwd}@${conn}\n@upd_apex_privs.sql\nlb update -changelog f${application_id}.xml\nexit" > upd_apex.sql
+        printf "set cloudconfig ./network/admin/wallet.zip\nconn ${schema}/${pwd}@${conn}\n@upd_apex_privs.sql\nlb update-file -changelog f${application_id}.xml\nexit" > upd_apex.sql
         
         sql /nolog @./upd_apex.sql
     else

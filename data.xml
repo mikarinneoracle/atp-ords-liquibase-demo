@@ -12,7 +12,7 @@
         <insert tableName="PRICE">
             <column name="ID" valueNumeric="3"/>
             <column name="TIER" value="PRO"/>
-            <column name="PRICE_MO" valueNumeric="44"/>
+            <column name="PRICE_MO" valueNumeric="15"/>
             <column name="USERS" valueNumeric="20"/>
             <column name="STORAGE" valueNumeric="10"/>
             <column name="SUPPORT" value="Priority email support"/>
@@ -20,7 +20,7 @@
         <insert tableName="PRICE">
             <column name="ID" valueNumeric="4"/>
             <column name="TIER" value="ENTERPRISE"/>
-            <column name="PRICE_MO" valueNumeric="150"/>
+            <column name="PRICE_MO" valueNumeric="29"/>
             <column name="USERS" valueNumeric="30"/>
             <column name="STORAGE" valueNumeric="15"/>
             <column name="SUPPORT" value="Phone and email support"/>
