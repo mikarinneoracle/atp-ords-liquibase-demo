@@ -1,5 +1,5 @@
 var data = { free: { price : {}, options : {} }, pro: { price : {}, options : {} }, enterprise: { price : {}, options : {} } };
-var url = 'URL';
+var url = '${URL}';
 
 var pricing = new Vue({
   el: '#pricing',

@@ -1,5 +1,7 @@
 {
     "compartment_ocid": "<YOUR COMPARTMENT OCID>",
     "region": "eu-amsterdam-1",
-    "use_always_free": "false"  
+    "use_always_free": "false" ,
+    "ords_url": "ORDS_URL",
+    "apex_url": "APEX_URL"  
 }

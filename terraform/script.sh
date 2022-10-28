@@ -12,7 +12,7 @@ unzip -q V1022102-01.zip
 ./sqlcl/bin/sql -v
 echo "-------------------------------------------------------------------------------------------------------------------"
 sh gen_apex.sh
-cd ./network/admin
-unzip -q wallet.zip
-cd ../..
-grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo $(head -n 1)
+#cd ./network/admin
+#unzip -q wallet.zip
+#cd ../..
+#grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo $(head -n 1)
