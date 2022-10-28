@@ -38,9 +38,9 @@ fi
 oci resource-manager job get-job-logs-content --job-id $jobId > log.txt
 sed -i 's/\\n/\n/g' log.txt
 tail -n 3 log.txt | head -n 1 > out.txt
-export ocid=$(grep -oP '(?<=atp = \\")[^\\"]*' out.txt)
-echo "ATP: $ocid"
-oci db autonomous-database generate-wallet --autonomous-database-id $ocid --password 'WelcomeFolks123#!' --file wallet.zip
+export atp=$(grep -oP '(?<=atp = \\")[^\\"]*' out.txt)
+echo "ATP: $atp"
+oci db autonomous-database generate-wallet --autonomous-database-id $atp --password 'WelcomeFolks123#!' --file wallet.zip
 mkdir -p ./network/admin
 mv wallet.zip ./network/admin/
 cd ./network/admin
