@@ -13,9 +13,9 @@ cp ../pricing.css html/.
 zip -r stack.zip *
 export ocid=$(oci resource-manager stack create --config-source stack.zip --compartment-id $compt_ocid --terraform-version 0.12.x | jq '.data.id' | tr -d '"')
 cd ..
-echo "--------- Update Terraform with vars.json ---------"
+echo "--------- Update Terraform with vars.json (to create infra) ---------"
 cat vars.json
-echo "---------------------------------------------------"
+echo "---------------------------------------------------------------------"
 oci resource-manager stack update --stack-id $ocid --variables file://vars.json --force
 export jobId=$(oci resource-manager job create --stack-id $ocid --operation APPLY --apply-job-plan-resolution '{"isAutoApproved": true }' | jq '.data.id' | tr -d '"')
 export tries=0
@@ -48,13 +48,11 @@ unzip -q wallet.zip
 cd ../..
 export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/priceadmin")
 export apex=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/r/priceadmin/price-admin/login")
-echo $url
-echo $apex
 sed -i "s|ORDS_URL|$url|g" vars.json
 sed -i "s|APEX_URL|$apex|g" vars.json
-echo "--------- Update Terraform with vars.json ---------"
+echo "--------- Update Terraform with vars.json (to update infra/app with previously generated values) ---------"
 cat vars.json
-echo "---------------------------------------------------"
+echo "----------------------------------------------------------------------------------------------------------"
 oci resource-manager stack update --stack-id $ocid --variables file://vars.json --force
 export jobId=$(oci resource-manager job create --stack-id $ocid --operation APPLY --apply-job-plan-resolution '{"isAutoApproved": true }' | jq '.data.id' | tr -d '"')
 export tries=0
