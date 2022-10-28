@@ -13,13 +13,13 @@ printf "GRANT CONNECT, CREATE SESSION, CREATE CLUSTER, CREATE DIMENSION, CREATE 
 printf "ALTER USER ${schema} quota unlimited on DATA;\n/\n" >> upd.sql
 printf "conn ${schema}/${pwd}@${conn}\n" >> upd.sql
 if [ -f "controller.xml" ]; then
-   printf "lb update --changelog controller.xml\n" >> upd.sql
+   printf "lb update -changelog-file controller.xml\n" >> upd.sql
 else
     echo "Controller.xml not found. Schema not copied to ${schema}."
 fi
 
 if [ -f "ords-rest_schema.xml" ]; then
-   printf "lb update --changelog ords-rest_schema.xml\n" >> upd.sql
+   printf "lb update -changelog-file ords-rest_schema.xml\n" >> upd.sql
 else
     echo "Ords-rest_schema not found. ORDS schema not copied to ${schema}."
 fi
@@ -27,19 +27,19 @@ fi
 if [ "${tables_to_copy}" == "Y" ]; then
     echo "Copying tables data to ${schema}."
     if [ -f "data.xml" ]; then
-           printf "lb update --changelog data.xml\n" >> upd.sql
+           printf "lb update -changelog-file data.xml\n" >> upd.sql
     fi
 
     for filename in data*.xml; do
         [ -e "$filename" ] || continue
         if [ $filename != "data.xml" ]; then
-           printf "lb update --changelog ${filename}\n" >> upd.sql
+           printf "lb update -changelog-file ${filename}\n" >> upd.sql
         fi
     done
 fi
 
 printf "\ntables\nexit" >> upd.sql
-./sqlcl/bin/sql /nolog @./upd.sql
+sql /nolog @./upd.sql
 
 if [ -n "${wsname}" ]; then
     printf "set cloudconfig ./network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd_apex.sql
@@ -76,7 +76,7 @@ if [ -n "${wsname}" ]; then
     printf "    );\n" >> upd_apex.sql
     printf "    commit;\n" >> upd_apex.sql
     printf "end;\n/\nexit\n" >> upd_apex.sql
-    ./sqlcl/bin/sql /nolog @./upd_apex.sql
+    sql /nolog @./upd_apex.sql
 fi
 
 if [ -n "${application_id}" ]; then
@@ -88,9 +88,9 @@ if [ -n "${application_id}" ]; then
         printf "APEX_UTIL.PAUSE(2);\n" >> upd_apex_privs.sql;
         printf "end;\n/\n" >> upd_apex_privs.sql;
 
-        printf "set cloudconfig ./network/admin/wallet.zip\nconn ${schema}/${pwd}@${conn}\n@upd_apex_privs.sql\nlb update --changelog f${application_id}.xml\nexit" > upd_apex.sql
+        printf "set cloudconfig ./network/admin/wallet.zip\nconn ${schema}/${pwd}@${conn}\n@upd_apex_privs.sql\nlb update -changelog-file f${application_id}.xml\nexit" > upd_apex.sql
         
-        ./sqlcl/bin/sql /nolog @./upd_apex.sql
+        sql /nolog @./upd_apex.sql
     else
         echo "${application_id} not found. Not copied to Dev${task_id} ${schema}."
     fi
