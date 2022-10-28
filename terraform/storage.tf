@@ -7,7 +7,7 @@ resource "oci_objectstorage_bucket" "pricing" {
 
 resource "oci_objectstorage_object" "index_html" {
   bucket    = oci_objectstorage_bucket.pricing.name
-  content   = content   = templatefile("./html/vue.js", { ORDS_URL = var.ords_url, APEX_URL = var.apex_url })
+  content   = data.template_file.index.rendered
   namespace = data.oci_objectstorage_namespace.user_namespace.namespace
   object    = "index.html"
   content_type = "text/html"
