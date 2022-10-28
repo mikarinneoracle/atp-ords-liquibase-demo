@@ -39,7 +39,7 @@ if [ "${tables_to_copy}" == "Y" ]; then
 fi
 
 printf "\ntables\nexit" >> upd.sql
-sql /nolog @./upd.sql
+./sqlcl/bin/sql /nolog @./upd.sql
 
 if [ -n "${wsname}" ]; then
     printf "set cloudconfig ./network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd_apex.sql
@@ -76,7 +76,7 @@ if [ -n "${wsname}" ]; then
     printf "    );\n" >> upd_apex.sql
     printf "    commit;\n" >> upd_apex.sql
     printf "end;\n/\nexit\n" >> upd_apex.sql
-    sql /nolog @./upd_apex.sql
+    ./sqlcl/bin/sql /nolog @./upd_apex.sql
 fi
 
 if [ -n "${application_id}" ]; then
@@ -90,7 +90,7 @@ if [ -n "${application_id}" ]; then
 
         printf "set cloudconfig ./network/admin/wallet.zip\nconn ${schema}/${pwd}@${conn}\n@upd_apex_privs.sql\nlb update --changelog-file f${application_id}.xml\nexit" > upd_apex.sql
         
-        sql /nolog @./upd_apex.sql
+        ./sqlcl/bin/sql /nolog @./upd_apex.sql
     else
         echo "${application_id} not found. Not copied to Dev${task_id} ${schema}."
     fi
