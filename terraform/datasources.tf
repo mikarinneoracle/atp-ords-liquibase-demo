@@ -3,7 +3,7 @@ data "oci_objectstorage_namespace" "user_namespace" {
 }
 
 data "template_file" "index" {
-  template = "${file("./html/index.htm")}"
+  template = "${file("./html/index.html")}"
   vars = {
     URL = "${var.apex_url}"
   }
