@@ -16,5 +16,6 @@ variable "ords_url" {
 
 variable "apex_url" {
   type        = string
+  default     = ""
   description = "APEX url"
 }
