@@ -8,7 +8,8 @@ cp -rf ../table .
 cp -rf ../ref_constraint .
 mkdir html
 cp ../index.html html/.
-cp ../vue.js html/.    
+cp ../vue.js html/.
+cp ../axios.min.js html/.
 cp ../pricing.css html/. 
 zip -r stack.zip *
 export ocid=$(oci resource-manager stack create --config-source stack.zip --compartment-id $compt_ocid --terraform-version 0.12.x | jq '.data.id' | tr -d '"')
