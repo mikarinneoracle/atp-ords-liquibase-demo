@@ -13,14 +13,12 @@ printf "GRANT CONNECT, CREATE SESSION, CREATE CLUSTER, CREATE DIMENSION, CREATE 
 printf "ALTER USER ${schema} quota unlimited on DATA;\n/\n" >> upd.sql
 printf "conn ${schema}/${pwd}@${conn}\n" >> upd.sql
 if [ -f "controller.xml" ]; then
-   echo "Copying tables to ${schema}."
    printf "lb update -changelog controller.xml\n" >> upd.sql
 else
     echo "Controller.xml not found. Schema not copied to ${schema}."
 fi
 
 if [ -f "ords-rest_schema.xml" ]; then
-   echo "Copying ORDS to ${schema}."
    printf "lb update -changelog ords-rest_schema.xml\n" >> upd.sql
 else
     echo "Ords-rest_schema not found. ORDS schema not copied to ${schema}."
@@ -41,7 +39,7 @@ if [ "${tables_to_copy}" == "Y" ]; then
 fi
 
 printf "\ntables\nexit" >> upd.sql
-sql /nolog @./upd.sql
+./sqlcl/bin/sql /nolog @./upd.sql
 
 if [ -n "${wsname}" ]; then
     printf "set cloudconfig ./network/admin/wallet.zip\nconn admin/${pwd}@${conn}\n/\n" > upd_apex.sql
@@ -78,7 +76,7 @@ if [ -n "${wsname}" ]; then
     printf "    );\n" >> upd_apex.sql
     printf "    commit;\n" >> upd_apex.sql
     printf "end;\n/\nexit\n" >> upd_apex.sql
-    sql /nolog @./upd_apex.sql
+    ./sqlcl/bin/sql /nolog @./upd_apex.sql
 fi
 
 if [ -n "${application_id}" ]; then
@@ -92,7 +90,7 @@ if [ -n "${application_id}" ]; then
 
         printf "set cloudconfig ./network/admin/wallet.zip\nconn ${schema}/${pwd}@${conn}\n@upd_apex_privs.sql\nlb update -changelog f${application_id}.xml\nexit" > upd_apex.sql
         
-        sql /nolog @./upd_apex.sql
+        ./sqlcl/bin/sql /nolog @./upd_apex.sql
     else
         echo "${application_id} not found. Not copied to Dev${task_id} ${schema}."
     fi
