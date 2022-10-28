@@ -1,14 +1,11 @@
 var data = { free: { price : {}, options : {} }, pro: { price : {}, options : {} }, enterprise: { price : {}, options : {} } };
-var url = '${ORDS_URL}';
-var apex_url = '${APEX_URL}';
+var url = '${URL}';
 
 var pricing = new Vue({
   el: '#pricing',
   data: { data },
   mounted () {
     console.log(url);
-    console.log(apex_url);
-    data.apex = apex_url;
     data.free = { price : {}, options : {} }
     data.pro = { price : {}, options : {} }
     data.enterprise = { price : {}, options : {} }
