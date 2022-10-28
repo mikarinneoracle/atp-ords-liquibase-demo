@@ -16,7 +16,7 @@ resource "oci_objectstorage_object" "index_html" {
 
 resource "oci_objectstorage_object" "vue_js" {
   bucket    = oci_objectstorage_bucket.pricing.name
-  content   = file("./html/vue_js")
+  content   = file("./html/vue.js")
   namespace = data.oci_objectstorage_namespace.user_namespace.namespace
   object    = "vue.js"
   content_type = "text/javascript"
