@@ -55,9 +55,9 @@ export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | e
 export apex=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/r/priceadmin/price-admin/login")
 sed -i "s|\"ords_url\": \"\"|\"ords_url\": \"$url\"|g" vars.json
 sed -i "s|\"apex_url\": \"\"|\"apex_url\": \"$apex\"|g" vars.json
-echo "--------- Update Terraform with vars.json (to update infra/app with previously generated values) ---------"
+echo "--------- Update Terraform with vars.json (to update html in bucket with previously generated values) ---------"
 cat vars.json
-echo "----------------------------------------------------------------------------------------------------------"
+echo "---------------------------------------------------------------------------------------------------------------"
 oci resource-manager stack update --stack-id $ocid --variables file://vars.json --force
 export jobId=$(oci resource-manager job create --stack-id $ocid --operation APPLY --apply-job-plan-resolution '{"isAutoApproved": true }' | jq '.data.id' | tr -d '"')
 export tries=0
