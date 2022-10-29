@@ -1,6 +1,6 @@
 export region='eu-amsterdam-1'
 export compt_ocid='<YOUR COMPARTMENT OCID>'
-echo "--------- Packaging terraform and source files for the Stack as .zip --------"
+echo "--------- Packaging Terraform and source files for the Stack as .zip --------"
 cd terraform
 cp ../gen_apex.sh .
 cp ../*.xml .
