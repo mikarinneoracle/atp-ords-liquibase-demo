@@ -1,6 +1,6 @@
 ## Instructions
 
-<b>prereq: oci cli must be working in oci cloud shell</b>
+<i><b>prereq: oci cli must be working in oci cloud shell</b></i>
 
 ### Part 1 - deploying single page app with ATP, ORDS and APEX using oci cli and LB in cloud shell
 <p>
@@ -28,6 +28,9 @@ Then it will update the html content with generated url's and upload the the con
     
 <p>
 Access <i>pricing bucket</i> from your browser and open the <code>index.html</code>
+    
+<p>
+After making sure the html page works (do a few reloads to the page if necessary) delete resources manually.
 
 ### Part 2 - deploying single page app with ATP, ORDS and APEX using Terraform (oci resource manager stack and JSON)
 <p>
@@ -49,6 +52,8 @@ export compt_ocid='&lt;YOUR COMPARTMENT OCID&gt;'
 <p>
 Run <code>sh script-tf-json.sh</code>
 
+<i>note: If your run Part 2 right after Part 1, first delete the "pricing" resources manually (ATP and Object Storage).</i>
+
 <p>
 Script will run in 2 parts.
 First it will create a Resource Manager Terraform Stack and update it with <code>vars.json</code> to create the infra for the same resources as in Part 1.
@@ -56,6 +61,9 @@ Then it will update the RM Terraform Stack with <code>vars.json</code> having th
 
 <p>
 Access <i>pricing bucket</i> from your browser and open the <code>index.html</code>
+    
+<p>
+After making sure the html page works (do a few reloads to the page if necessary) delete all created resources with Terraform by clicking <code>destroy</code> on the RM Stack in the cloud console.
 
 ### See on Youtube
 
