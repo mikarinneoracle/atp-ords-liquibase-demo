@@ -20,7 +20,7 @@ export compt_ocid='&lt;YOUR COMPARTMENT OCID&gt;'
 </pre>
 
 <p>
-Run <code>sh script.sh</code>code>
+Run <code>sh script.sh</code>
 
 <p>
 Script will create "pricing" ATP instance and update the database with a schema, ORDS and APEX with Liquibase.
