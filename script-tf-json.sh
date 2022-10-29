@@ -1,5 +1,6 @@
 export region='eu-amsterdam-1'
 export compt_ocid='<YOUR COMPARTMENT OCID>'
+echo "--------- Packaging terraform and source files for the Stack as .zip --------"
 cd terraform
 cp ../gen_apex.sh .
 cp ../*.xml .
@@ -11,6 +12,8 @@ cp ../index.html html/.
 cp ../vue.js html/.
 cp ../pricing.css html/. 
 zip -r stack.zip *
+echo "----------------------------------------------------------------------------"
+echo ""
 export ocid=$(oci resource-manager stack create --config-source stack.zip --compartment-id $compt_ocid --terraform-version 0.12.x | jq '.data.id' | tr -d '"')
 cd ..
 sed -i "s|<YOUR COMPARTMENT OCID>|$compt_ocid|g" vars.json
