@@ -52,7 +52,7 @@ export compt_ocid='&lt;YOUR COMPARTMENT OCID&gt;'
 <p>
 Run <code>sh script-tf-json.sh</code>
 
-<i>note: If your run Part 2 right after Part 1, first delete the "pricing" resources manually (ATP and Object Storage).</i>
+<i>note:</i> If you run Part 2 right after Part 1, first delete the "pricing" resources manually (ATP and Object Storage).
 
 <p>
 Script will run in 2 parts.
