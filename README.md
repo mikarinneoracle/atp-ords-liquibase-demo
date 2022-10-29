@@ -2,7 +2,7 @@
 
 <i><b>prereq: oci cli must be working in oci cloud shell</b></i>
 
-### Part 1 - deploying single page app with ATP, ORDS and APEX using oci cli and LB in cloud shell
+### Part 1 - deploying single page app with ATP, ORDS and APEX using oci cli in cloud shell
 <p>
 Open oci cloud shell
 
