@@ -14,6 +14,7 @@ zip -r stack.zip *
 export ocid=$(oci resource-manager stack create --config-source stack.zip --compartment-id $compt_ocid --terraform-version 0.12.x | jq '.data.id' | tr -d '"')
 cd ..
 sed -i "s|<YOUR COMPARTMENT OCID>|$compt_ocid|g" vars.json
+sed -i "s|\"region\": \"\"|\"region\": \"$region\"|g" vars.json
 echo "--------- Update Terraform with vars.json (to create infra) ---------"
 cat vars.json
 echo "---------------------------------------------------------------------"
