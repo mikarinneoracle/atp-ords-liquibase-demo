@@ -28,7 +28,12 @@ Then it will update the html content with generated url's and upload the the con
     
 <p>
 Access <i>pricing bucket</i> from your browser and open the <code>index.html</code>
-    
+
+<p>
+Access APEX "price admin" application from the <i>Admin</i> -link on the page.
+APEX <b>user</b> is <code>priceadmin</code> and <b>password</b> is <code>WelcomeFolks123#!</code>
+Edit prices and options and then save and reload the html page.
+
 <p>
 After making sure the html page works (do a few reloads to the page if necessary) delete resources manually.
 
@@ -61,10 +66,17 @@ Then it will update the RM Terraform Stack with <code>vars.json</code> having th
 
 <p>
 Access <i>pricing bucket</i> from your browser and open the <code>index.html</code>
-    
+
+<p>
+Access APEX "price admin" application from the <i>Admin</i> -link on the page.
+APEX <b>user</b> is <code>priceadmin</code> and <b>password</b> is <code>WelcomeFolks123#!</code>
+Edit prices and options and then save and reload the html page.
+
 <p>
 After making sure the html page works (do a few reloads to the page if necessary) delete all created resources with Terraform by clicking <code>destroy</code> on the RM Stack in the cloud console.
 
 ### See on Youtube
 
 Part 1: <a href="https://www.youtube.com/watch?v=80CWk2baJy4">https://www.youtube.com/watch?v=80CWk2baJy4</a>
+
+Part 2: <a href="https://www.youtube.com/watch?v=2FUG6G0LIgo">https://www.youtube.com/watch?v=2FUG6G0LIgo</a>
