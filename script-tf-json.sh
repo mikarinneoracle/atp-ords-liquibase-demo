@@ -50,7 +50,7 @@ cd ../..
 export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/priceadmin")
 export apex=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/r/priceadmin/price-admin/login")
 sed -i "s|\"ords_url\": \"\"|\"ords_url\": \"$url\"|g" vars.json
-sed -i "s|\"apex_url\": \"\"|\"ords_url\": \"$apex\"|g" vars.json
+sed -i "s|\"apex_url\": \"\"|\"apex_url\": \"$apex\"|g" vars.json
 echo "--------- Update Terraform with vars.json (to update infra/app with previously generated values) ---------"
 cat vars.json
 echo "----------------------------------------------------------------------------------------------------------"
