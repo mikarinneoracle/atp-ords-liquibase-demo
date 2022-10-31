@@ -16,3 +16,6 @@ sh gen_apex.sh
 #unzip -q wallet.zip
 #cd ../..
 #grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo $(head -n 1)
+# clean-up
+rm -rf ./network
+rm -f wallet64
