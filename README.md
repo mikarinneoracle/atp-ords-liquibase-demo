@@ -55,6 +55,10 @@ export compt_ocid='&lt;YOUR COMPARTMENT OCID&gt;'
 </pre>
 
 <p>
+You can also set the <code>always-free</code> to <code>true</code> if you want to use the always-free option of the ATP in
+<a href="https://github.com/mikarinneoracle/atp-ords-liquibase-demo/blob/main/vars.json#L4">vars.json</a>.
+    
+<p>
 Run <code>sh script-tf-json.sh</code>
 
 <p>
