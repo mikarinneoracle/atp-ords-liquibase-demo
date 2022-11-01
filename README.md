@@ -68,7 +68,7 @@ You can also set the <code>always-free</code> to <code>true</code> if you want t
 Run <code>sh script-tf-json.sh</code>
 
 <p>
-<i>note:</i> If you run Part 2 right after Part 1, first delete the "pricing" resources manually (ATP and Object Storage).
+<i>Note:</i> If you run Part 2 right after Part 1, first delete the "pricing" resources manually (ATP and Object Storage).
 
 <p>
 Script will run in 2 parts.
@@ -76,7 +76,7 @@ First it will create a Resource Manager Terraform Stack and update it with <code
 Then it will update the RM Terraform Stack with <code>vars.json</code> having the generated url's and run the Stack again to update the  html content in Object Storage.
 
 <p>
-<i>note:</i> In case you wonder the terraform (RM Stack) does <i>not</i> use oci cli.
+<i>Note:</i> In case you wonder the terraform (RM Stack) does <i>not</i> use oci cli. It uses <code>local-exec</code> but not oci cli.
 
 <p>
 Access <i>pricing bucket</i> from your browser and open the <code>index.html</code>
