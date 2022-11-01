@@ -20,6 +20,9 @@ export compt_ocid='&lt;YOUR COMPARTMENT OCID&gt;'
 </pre>
 
 <p>
+<i>Note</i>: Just make sure you are running the Cloud Shell in the <i>same region</i> as this one.
+
+<p>
 Run <code>sh script.sh</code>
 
 <p>
@@ -53,6 +56,9 @@ Edit <code>script-tf-json.sh</code> with oci code editor<br>
 export region='eu-amsterdam-1'
 export compt_ocid='&lt;YOUR COMPARTMENT OCID&gt;'
 </pre>
+
+<p>
+<i>Note</i>: Just make sure you are running the Cloud Shell in the <i>same region</i> as this one.
 
 <p>
 You can also set the <code>always-free</code> to <code>true</code> if you want to use the always-free option of the ATP in
