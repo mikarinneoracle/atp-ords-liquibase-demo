@@ -45,15 +45,10 @@ sed -i 's/\\n/\n/g' log.txt
 tail -n 3 log.txt | head -n 1 > out.txt
 export atp=$(grep -oP '(?<=atp = \\")[^\\"]*' out.txt)
 echo "ATP: $atp"
-oci db autonomous-database generate-wallet --autonomous-database-id $atp --password 'WelcomeFolks123#!' --file wallet.zip
-mkdir -p ./network/admin
-mv wallet.zip ./network/admin/
-cd ./network/admin
-unzip -q wallet.zip
-cd ../..
-export url=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/priceadmin")
-export apex=$(grep -oP '(?<=service_name=)[^_]*' ./network/admin/tnsnames.ora | echo "https://$(head -n 1)-pricing.adb.${region}.oraclecloudapps.com/ords/r/priceadmin/price-admin/login")
-sed -i "s|\"ords_url\": \"\"|\"ords_url\": \"$url\"|g" vars.json
+export url=$(oci db autonomous-database get --autonomous-database-id $atp | jq -r '.data."connection-urls"."apex-url"')
+export ords=$(echo $url | sed "s|apex|priceadmin|g")
+export apex=$(echo $url | sed "s|apex|r/priceadmin/price-admin/login|g")
+sed -i "s|\"ords_url\": \"\"|\"ords_url\": \"$ords\"|g" vars.json
 sed -i "s|\"apex_url\": \"\"|\"apex_url\": \"$apex\"|g" vars.json
 echo "--------- Update Terraform with vars.json (to update html in bucket with previously generated values) ---------"
 cat vars.json
