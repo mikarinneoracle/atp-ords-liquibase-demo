@@ -3,6 +3,10 @@
 <i><b>prereq: oci cli must be working in oci cloud shell</b></i>
 
 ### Part 1 - deploying single page app with ATP, ORDS and APEX using oci cli in cloud shell
+
+<p>
+<img src="atp_ords_spa_1.png" width="800" />
+
 <p>
 Open oci cloud shell
 
@@ -43,7 +47,7 @@ After making sure the html page works (do a few reloads to the page if necessary
 ### Part 2 - deploying single page app with ATP, ORDS and APEX using Terraform (oci resource manager stack and JSON) from cloud shell
 
 <p>
-<img src="atp_ords_spa.png" width="800" />
+<img src="atp_ords_spa_2.png" width="800" />
 
 <p>
 Open oci cloud shell
