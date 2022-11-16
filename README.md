@@ -41,6 +41,10 @@ Edit prices and options and then save and reload the html page.
 After making sure the html page works (do a few reloads to the page if necessary) delete resources manually.
 
 ### Part 2 - deploying single page app with ATP, ORDS and APEX using Terraform (oci resource manager stack and JSON) from cloud shell
+
+<p>
+![](atp-ords-spa.png)
+
 <p>
 Open oci cloud shell
 
